@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.g6.organizadorfinanceiro.model.OutstandingPayments;
 
 @Repository
-public interface OutstandingPaymentsRepository extends JpaRepository<OutstandingPayments, Long>{}
+public interface OutstandingPaymentsRepository extends JpaRepository<OutstandingPayments, Long>{
+
+}
