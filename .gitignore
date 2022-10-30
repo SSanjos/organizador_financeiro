@@ -1,5 +1,5 @@
 HELP.md
-target/
+target/classes/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -38,6 +38,8 @@ build/
 ### Eclipse ###
 .metadata
 bin/
+target/
+target/classes/*
 tmp/
 *.tmp
 *.bak
