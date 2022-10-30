@@ -1,5 +1,7 @@
 package br.com.g6.organizadorfinanceiro.model;
 
+import br.com.g6.organizadorfinanceiro.enumeration.TypeMovement;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -22,9 +24,17 @@ public class Movement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idMovement;
-	
+
+	public TypeMovement getTypeMovement() {
+		return typeMovement;
+	}
+
+	public void setTypeMovement(TypeMovement typeMovement) {
+		this.typeMovement = typeMovement;
+	}
+
 	@NotNull
-	private int typeMovement;
+	private TypeMovement typeMovement;
 	
 	@NotNull
 	private double valueMovement;
@@ -53,13 +63,7 @@ public class Movement {
 		this.idMovement = idMovement;
 	}
 
-	public int getTypeMovement() {
-		return typeMovement;
-	}
 
-	public void setTypeMovement(int typeMovement) {
-		this.typeMovement = typeMovement;
-	}
 
 	public double getValueMovement() {
 		return valueMovement;
