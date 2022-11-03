@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("/users")
 @CrossOrigin("*")
-public class UserController {
+public class 	UserController {
 	
 
 	@Autowired
