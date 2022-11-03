@@ -1,20 +1,20 @@
 package br.com.g6.organizadorfinanceiro.controller;
 
-import br.com.g6.organizadorfinanceiro.model.Movement;
-import br.com.g6.organizadorfinanceiro.model.OutstandingPayments;
-import br.com.g6.organizadorfinanceiro.model.User;
-import br.com.g6.organizadorfinanceiro.repository.MovementRepository;
-import br.com.g6.organizadorfinanceiro.service.MovementService;
-import br.com.g6.organizadorfinanceiro.service.UserService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import br.com.g6.organizadorfinanceiro.model.Movement;
+import br.com.g6.organizadorfinanceiro.model.User;
+import br.com.g6.organizadorfinanceiro.service.MovementService;
 
 @RestController
 @RequestMapping("/movement")
@@ -23,7 +23,17 @@ public class MovementController {
 
     @Autowired(required = true)
     private MovementService movementService;
-
+   
+    @GetMapping
+	public ResponseEntity<List<Movement>> getAll(){
+		try {
+			return ResponseEntity.ok(movementService.findAll());
+		}
+		catch (Exception e) {
+			return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+    
     @PostMapping
     public ResponseEntity<Movement> createMovement(@RequestBody Movement movement) {
         try {

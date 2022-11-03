@@ -8,17 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Service
 public class MovementService {
-    @Autowired(required = true)
+	@Autowired(required = true)
     private MovementRepository movementRepository;
 
-
-
-   public Movement createdMovement(Movement movement) {
+    public List<Movement> findAll(){
+        try {
+            return movementRepository.findAll();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Movimento não encontrado" + e.getMessage());
+        }
+    }
+    
+    public Movement createdMovement(Movement movement) {
 
       return movementRepository.save(movement);
-   }
+    }
 }

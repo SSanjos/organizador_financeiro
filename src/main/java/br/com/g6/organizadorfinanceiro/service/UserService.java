@@ -20,9 +20,6 @@ public class UserService {
     @Autowired(required = true)
     private UserRepository userRepository;
 
-
-
-
     public List<User> findAll(){
         try {
             return userRepository.findAll();
@@ -31,7 +28,6 @@ public class UserService {
         {
             throw new RuntimeException("Usuário não encontrado" + e.getMessage());
         }
-
     }
 
     public User saveUser(User user) {

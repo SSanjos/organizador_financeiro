@@ -18,24 +18,20 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/users")
 @CrossOrigin("*")
 public class UserController {
-	
 
 	@Autowired
 	private UserService userService;
-
-
 
 	@GetMapping
 	public ResponseEntity<List<User>> getAll(){
 		try {
 			return ResponseEntity.ok(userService.findAll());
-
 		}
 		catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-
 	}
+	
 	@DeleteMapping(value = "{userId}")
 	public ResponseEntity<Long> DeleteUser(@PathVariable Long userId){
 		userService.deleteById(userId);
