@@ -1,13 +1,15 @@
-package br.com.g6.organizadorfinanceiro.applicationsecurity;
+package br.com.g6.organizadorfinanceiro.applicationSecurity;
 
 import br.com.g6.organizadorfinanceiro.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
 import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String userName;
@@ -22,7 +24,9 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     @Override
+    //GrantedAuthoritys are high level permissions the user is granted. A few examples are roles or scopes.
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return null;
     }
 

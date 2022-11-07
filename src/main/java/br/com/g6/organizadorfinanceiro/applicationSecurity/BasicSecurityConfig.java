@@ -1,4 +1,4 @@
-package br.com.g6.organizadorfinanceiro.applicationsecurity;
+package br.com.g6.organizadorfinanceiro.applicationSecurity;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,24 +9,29 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class BasicSecurityConfig {
+    //página para permissão de acessos
 
     @Bean
     public PasswordEncoder passwordEncoder(){
+
         return new BCryptPasswordEncoder();
     }
 
     @Bean
+
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
+
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -36,8 +41,11 @@ public class BasicSecurityConfig {
         http.authorizeHttpRequests((auth) -> auth
                 .antMatchers("/users/login").permitAll()
                 .antMatchers("/users/registration").permitAll()
+                .antMatchers("/movement/create").permitAll()
+
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().authenticated()).httpBasic();
         return http.build();
     }
 }
+

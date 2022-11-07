@@ -1,18 +1,12 @@
 package br.com.g6.organizadorfinanceiro.model;
 
 import br.com.g6.organizadorfinanceiro.enumeration.TypeMovement;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -20,66 +14,48 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "Movement")
 public class Movement {
-		
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
+	@Setter //??
+//	@Column(name = "idMovement", nullable = false)//permite alterar nome da coluna
 	private Long idMovement;
 
-	public TypeMovement getTypeMovement() {
-		return typeMovement;
-	}
-
-	public void setTypeMovement(TypeMovement typeMovement) {
-		this.typeMovement = typeMovement;
-	}
-
 	@NotNull
+	@Getter
+	@Setter
 	private TypeMovement typeMovement;
 	
 	@NotNull
+	@Getter
+	@Setter
 	private double valueMovement;
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
+	@Getter
+	@Setter
 	private Date dateMovement;
 	
 	@NotNull
 	@Size(min = 1, max = 500)
 	private String descriptionMovement;
-	
-	private int seqParcel;
 
-	@ManyToOne
+
+
+	private int seqParcel;
+	//retirar??
+
+	@OneToOne
+//	@NotNull
 	private User user;
+	//not null - QUAL DADO? SERIA O USER ID?
+	//um movimento tem um usuario, está dentro da classe
 
 	@OneToOne
 	private OutstandingPayments outstandingPayments;
 
-	public Long getIdMovement() {
-		return idMovement;
-	}
-
-	public void setIdMovement(Long idMovement) {
-		this.idMovement = idMovement;
-	}
-
-
-
-	public double getValueMovement() {
-		return valueMovement;
-	}
-
-	public void setValueMovement(double valueMovement) {
-		this.valueMovement = valueMovement;
-	}
-
-	public Date getDateMovement() {
-		return dateMovement;
-	}
-
-	public void setDateMovement(Date dateMovement) {
-		this.dateMovement = dateMovement;
-	}
 
 	public String getDescriptionMovement() {
 		return descriptionMovement;
@@ -93,9 +69,6 @@ public class Movement {
 		return seqParcel;
 	}
 
-	public void setSeqParcel(int seqParcel) {
-		this.seqParcel = seqParcel;
-	}
 
 	public User getUser() {
 		return user;
@@ -112,5 +85,5 @@ public class Movement {
 	public void setOutstandingPayments(OutstandingPayments outstandingPayments) {
 		this.outstandingPayments = outstandingPayments;
 	}
-	
+
 }

@@ -1,10 +1,12 @@
 package br.com.g6.organizadorfinanceiro.service;
 
 
+import br.com.g6.organizadorfinanceiro.model.Movement;
 import br.com.g6.organizadorfinanceiro.model.User;
 import br.com.g6.organizadorfinanceiro.model.UserLogin;
 import br.com.g6.organizadorfinanceiro.repository.UserRepository;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.tomcat.util.buf.UDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,16 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
     @Autowired(required = true)
-    private UserRepository userRepository;
+    private  UserRepository userRepository;
+
 
     public User userRegistration(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         String passwordEncoder = encoder.encode(user.getUserPassword());
+        //pegou a senha, agora vai fazer a criptografia
 
         user.setUserPassword(passwordEncoder);
         return userRepository.save(user);
