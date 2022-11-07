@@ -1,76 +1,56 @@
 package br.com.g6.organizadorfinanceiro.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import javax.persistence.*;
+import javax.sql.DataSource;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
+	@Setter
+//	@Column(name = "idUser", nullable = false)
 	private Long idUser;
-	
+
 	@NotNull
 	@Size(min = 1, max = 100)
+	@Getter
+	@Setter
 	private String userName;
-	
+
 	@NotNull
 	@Size(min = 1, max = 45)
+	@Getter
+	@Setter
 	private String userLastName;
-	
+
 	@NotNull
 	@Size(min = 1, max = 45)
+	@Getter
+	@Setter
 	private String userEmail;
-	
+
 	@NotNull
 	@Size(min = 1, max = 100)
+	@Getter
+	@Setter
 	private String userPassword;
 
-	public Long getIdUser() {
-		return idUser;
-	}
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
-	}
+    //não expor como get and set
 
-	public String getUserName() {
-		return userName;
-	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserLastName() {
-		return userLastName;
-	}
-
-	public void setUserLastName(String userLastName) {
-		this.userLastName = userLastName;
-	}
-
-	public String getUserEmail() {
-		return userEmail;
-	}
-
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-	
 }
+
+
