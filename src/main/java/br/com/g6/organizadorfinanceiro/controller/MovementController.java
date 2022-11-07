@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,6 +59,14 @@ public class MovementController {
 					return ResponseEntity.status(HttpStatus.OK)
 					.body(movementService.createdMovement(movement));
 		
+	}
+    
+    @DeleteMapping("/{idMovement}")
+	public ResponseEntity<Long> DeleteMovement(@PathVariable Long idMovement){
+    	movementService.deleteById(idMovement);
+		return new ResponseEntity<Long>(idMovement, HttpStatus.OK);
+
+
 	}
     
     

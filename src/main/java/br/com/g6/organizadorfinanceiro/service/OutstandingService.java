@@ -33,4 +33,15 @@ public class OutstandingService {
         return outstandingPaymentsRepository.save(outstandingPayments);
 
     }
+    
+    public void deleteById(Long idOutstandingPayments){
+        try {
+        	outstandingPaymentsRepository.deleteById(idOutstandingPayments);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Usuário não encontrado " + idOutstandingPayments + ": " + e.getMessage());
+        }
+
+    }
 }
