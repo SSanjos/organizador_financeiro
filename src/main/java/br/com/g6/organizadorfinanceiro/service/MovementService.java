@@ -30,4 +30,15 @@ public class MovementService {
 
       return movementRepository.save(movement);
     }
+    
+    public void deleteById(Long idMovement){
+        try {
+        	movementRepository.deleteById(idMovement);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Usuário não encontrado " + idMovement + ": " + e.getMessage());
+        }
+
+    }
 }
