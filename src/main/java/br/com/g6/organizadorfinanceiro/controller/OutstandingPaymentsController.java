@@ -6,14 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.g6.organizadorfinanceiro.model.OutstandingPayments;
-import br.com.g6.organizadorfinanceiro.model.User;
 import br.com.g6.organizadorfinanceiro.service.OutstandingService;
 
 @RestController
@@ -50,5 +52,18 @@ public class OutstandingPaymentsController {
 
 
     }
+    
+    @PutMapping
+	public ResponseEntity<OutstandingPayments> put(@RequestBody OutstandingPayments outstandingPayments){
+		return ResponseEntity.ok(outstandingService.createdOutstanding(outstandingPayments));
+	}
+    
+    @DeleteMapping("/{idOutstandingPayments}")
+	public ResponseEntity<Long> DeleteMovement(@PathVariable Long idOutstandingPayments){
+    	outstandingService.deleteById(idOutstandingPayments);
+		return new ResponseEntity<Long>(idOutstandingPayments, HttpStatus.OK);
+
+
+	}
 
 }
