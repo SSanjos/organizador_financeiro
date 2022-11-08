@@ -1,3 +1,4 @@
+/*
 package br.com.g6.organizadorfinanceiro.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,3 +10,4 @@ import br.com.g6.organizadorfinanceiro.model.OutstandingPayments;
 public interface OutstandingPaymentsRepository extends JpaRepository<OutstandingPayments, Long>{
 
 }
+*/

@@ -4,7 +4,8 @@ import br.com.g6.organizadorfinanceiro.enumeration.TypeMovement;
 import lombok.*;
 
 import javax.persistence.Embeddable;
-import java.sql.Date;
+import java.util.Date;
+
 @AllArgsConstructor
 @Builder
 @Data
@@ -15,7 +16,7 @@ public class CreateMovement {
 
     private TypeMovement typeMovement;
 
-    private int valueMovement;
+    private double valueMovement;
 
     private Date dateMovement;
 
@@ -23,7 +24,7 @@ public class CreateMovement {
 
     private Long idUser;
 
-    private String useName;
+    private String userName;
 
     private String password;
 }

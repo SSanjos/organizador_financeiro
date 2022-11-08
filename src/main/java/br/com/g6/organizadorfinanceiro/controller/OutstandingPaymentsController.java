@@ -1,4 +1,4 @@
-package br.com.g6.organizadorfinanceiro.controller;
+/* package br.com.g6.organizadorfinanceiro.controller;
 
 import java.util.List;
 
@@ -67,3 +67,4 @@ public class OutstandingPaymentsController {
 	}
 
 }
+*/

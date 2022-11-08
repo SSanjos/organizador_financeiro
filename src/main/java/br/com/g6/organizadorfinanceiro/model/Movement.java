@@ -52,11 +52,11 @@ public class Movement {
 	private User user;
 	//not null - QUAL DADO? SERIA O USER ID?
 	//um movimento tem um usuario, está dentro da classe
-
+/*
 	@OneToOne
 	private OutstandingPayments outstandingPayments;
 
-
+*/
 	public String getDescriptionMovement() {
 		return descriptionMovement;
 	}
@@ -77,7 +77,7 @@ public class Movement {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+/*
 	public OutstandingPayments getOutstandingPayments() {
 		return outstandingPayments;
 	}
@@ -85,5 +85,5 @@ public class Movement {
 	public void setOutstandingPayments(OutstandingPayments outstandingPayments) {
 		this.outstandingPayments = outstandingPayments;
 	}
-
+*/
 }

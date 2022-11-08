@@ -1,3 +1,4 @@
+/*
 package br.com.g6.organizadorfinanceiro.model;
 
 import java.util.Date;
@@ -40,3 +41,4 @@ public class OutstandingPayments {
 	}
 
 }
+*/
