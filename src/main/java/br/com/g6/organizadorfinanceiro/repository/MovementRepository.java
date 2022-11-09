@@ -16,13 +16,17 @@ public interface MovementRepository extends JpaRepository<Movement, Long> {
 
 //   List<Movement> findAll (Movement movement);
    Optional<Movement> findById (Long id);
-    List<Movement> findByUser (User user);
+
+
+ List<Movement> findByUser (User user);
 
     @Query(value = "SELECT * FROM Movement u WHERE  u.type_movement = ?1 and u.id = ?2", nativeQuery = true)
     List<Movement> findByTypeMovement(String typeMovement, Long userId);
 
+//    @Query(value = "SELECT * FROM Movement u WHERE  u.description_movement = ?1 and u.id = ?2", nativeQuery = true)
+//    List<Movement> findAllByDescriptionMovementContainingIgnoreCase(String descriptionMovement,  Long userId);
 
-    List<Movement> findAllByDescriptionMovementContainingIgnoreCase(String descriptionMovement);
+
 
 
 

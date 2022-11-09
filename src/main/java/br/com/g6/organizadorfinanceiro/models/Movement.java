@@ -65,5 +65,7 @@ public class Movement {
 	@Setter
 	@Enumerated(EnumType.STRING)
 	private TypeMovement typeMovement;
-	}
+
+
+}
 
