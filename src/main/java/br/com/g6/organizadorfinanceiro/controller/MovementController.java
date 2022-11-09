@@ -53,8 +53,14 @@ public class MovementController {
         return new ResponseEntity<List<Movement>>(movementService.getByUserEmail(emailToken), HttpStatus.OK);
     }
 
-
-
+    @GetMapping("/{typeMovement}")
+    public ResponseEntity<List<Movement>> findByTypeMoviment(@PathVariable("typeMovement") String typeMovement){
+    	try {
+    		return ResponseEntity.ok(movementService.findByTypeMovement(typeMovement));
+    	} catch (Exception e) {
+    		return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+    	}
+    }
 
     @PostMapping("/create")
     public ResponseEntity<Movement> createMovement(@RequestBody CreateMovement createMovement){

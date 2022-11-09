@@ -25,6 +25,7 @@ public class Movement {
 	@NotNull
 	@Getter
 	@Setter
+	@Enumerated(EnumType.STRING)
 	private TypeMovement typeMovement;
 	
 	@NotNull

@@ -1,5 +1,6 @@
 package br.com.g6.organizadorfinanceiro.service;
 
+import br.com.g6.organizadorfinanceiro.enumeration.TypeMovement;
 import br.com.g6.organizadorfinanceiro.model.Movement;
 import br.com.g6.organizadorfinanceiro.model.User;
 import br.com.g6.organizadorfinanceiro.repository.MovementRepository;
@@ -44,15 +45,24 @@ public class MovementService {
         return null;
     }
 
-
-
-
-
     public List<Movement> findByUserId(Long idUser){
         try {
             return (List<Movement>) movementRepository.findByUserId(idUser);
         } catch (Exception e) {
             throw new RuntimeException("Nao há movimentos" + e.getMessage());
+        }
+
+    }
+    
+    public List<Movement> findByTypeMovement(String type){
+        try {
+        	TypeMovement typeMovement = TypeMovement.get(type);
+        	if(typeMovement == null) {
+        		throw new RuntimeException("Tipo de movimento inválido");
+        	}
+            return (List<Movement>) movementRepository.findByTypeMovement(typeMovement);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getLocalizedMessage());
         }
 
     }
