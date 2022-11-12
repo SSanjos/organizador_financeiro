@@ -26,6 +26,7 @@ public class MovementService {
     private UserRepository userRepository;
 
 
+    //~~método para retornar qual usuário está logado ~~
     private Optional<User> getCurrentUser(){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> userLogged = userRepository.findByUsername(userDetails.getUsername());
@@ -33,7 +34,7 @@ public class MovementService {
         return userLogged;
     }
 
-    //~~~~Tratamento de erro~~~~
+    //~~~~Tratamento de erro - Movimento não encontrado~~~~
     public List<Movement> findAll() {
         try {
            Optional<User> user = getCurrentUser();
@@ -47,7 +48,7 @@ public class MovementService {
 
 
 
-
+//~~método para salvar movimentações~~
     public Movement save( Movement createMovement) {
         try {
             Optional<User> user = getCurrentUser();
@@ -64,49 +65,8 @@ public class MovementService {
         }
     }
 
-//~~~GetByEmail
 
-//    public List<Movement> getByUserEmail(String email) {
-//
-//       Optional<User> usuario = userRepository.findByUserEmail(email);
-//       if(usuario.isPresent())
-//       {
-//           return movementRepository.findByIdUser(usuario.get().getIdUser());
-//       }
-//
-//        return null;
-//    }
-
-    //~~~~~~
-
-//    public Optional<Movement> findAll(){
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-//                .getPrincipal();
-//
-//
-//
-//        return movementRepository.findById(userDetails.getAuthorities());
-//
-//
-//
-//        return null;
-//}
-
-
-
- //~~~~Tratamento de erro findAllByDescriptionMovement~~~~
-//    public  List<Movement> findAllByDescriptionMovementContainingIgnoreCase (String descriptionMovement){
-//        try {
-//
-//
-//            return movementRepository.findAllByDescriptionMovementContainingIgnoreCase(descriptionMovement, userId);
-//        } catch (Exception e) {
-//            throw new RuntimeException("Essa descrição não existe" + e.getMessage());
-//        }
-//
-//    }
-
-
+//~~método para buscar movimentações pelo tipo~~
     public List<Movement> findByTypeMovement(String typeMovement) {
         try {
             TypeMovement type = TypeMovement.get(typeMovement);
@@ -119,7 +79,7 @@ public class MovementService {
             throw new RuntimeException("Erro na consulta de tipo de movimento" + e.getMessage());
         }
     }
-
+//~~deletar movimento pelo id~~
     public void deleteById(Long idMovement){
         try {
             Optional<User> user = getCurrentUser();
@@ -127,8 +87,6 @@ public class MovementService {
 
                 movementRepository.deleteById(idMovement);
             }
-
-
         }catch (Exception e)
         {
             throw new RuntimeException("Movimento não encontrado " + idMovement + ": " + e.getMessage());
@@ -136,18 +94,4 @@ public class MovementService {
 
     }
 
-//    public Optional<List<Movement>>findAllByDescriptionMovementContainingIgnoreCase(String descriptionMovement) {
-//        try {
-//            Optional <User> user = getCurrentUser();
-//            if (user.isPresent()) {
-//                return movementRepository.findAllByDescriptionMovementContainingIgnoreCase(descriptionMovement.user.get().getId());
-//
-//
-//            }
-//            return null;
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException("Essa descrição  não foi encontrada" + e.getMessage());
-//        }
-//    }
 }

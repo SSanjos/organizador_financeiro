@@ -30,11 +30,14 @@ INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 
 
 ### Dependências Spring
+- Lombok
 - Spring Security
+- MySql Connector
+- Jwt
 - Spring Web
 - Spring Data JPA
-- Apache Commons Codec
-- Jwt
+
+
 
 
 

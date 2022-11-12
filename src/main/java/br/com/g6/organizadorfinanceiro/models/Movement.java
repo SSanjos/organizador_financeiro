@@ -22,13 +22,6 @@ public class Movement {
 //	@Column(name = "idMovement", nullable = false)//permite alterar nome da coluna
 	private Long idMovement;
 
-//	@NotNull
-//	@Getter
-//	@Setter
-//	@Enumerated(EnumType.STRING)
-//	private TypeMovement typeMovement;
-
-	
 	@NotNull
 	@Getter
 	@Setter
@@ -38,7 +31,8 @@ public class Movement {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Getter
 	@Setter
-	private Date dateMovement;
+	private Date dueDate;
+	//~~alteração do nome para data do vencimento~~
 	
 	@NotNull
 	@Getter
@@ -50,7 +44,7 @@ public class Movement {
 	@Getter
 	@Setter
 	private int seqParcel;
-	//retirar??
+	//~~ver como implementar~~
 
 	@ManyToOne
 	@JsonIgnoreProperties ("movementList")
@@ -65,6 +59,14 @@ public class Movement {
 	@Setter
 	@Enumerated(EnumType.STRING)
 	private TypeMovement typeMovement;
+
+	@NotNull
+	@Getter
+	@Setter
+	private Boolean wasPaid;
+	//default: false
+
+
 
 
 }
