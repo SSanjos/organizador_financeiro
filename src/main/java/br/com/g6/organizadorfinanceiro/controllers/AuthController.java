@@ -10,7 +10,9 @@ import br.com.g6.organizadorfinanceiro.payload.response.MessageResponse;
 import br.com.g6.organizadorfinanceiro.repository.RoleRepository;
 import br.com.g6.organizadorfinanceiro.repository.UserRepository;
 import br.com.g6.organizadorfinanceiro.security.jwt.JwtUtils;
+import br.com.g6.organizadorfinanceiro.services.SpringMailService;
 import br.com.g6.organizadorfinanceiro.services.UserDetailsImpl;
+import com.sun.mail.smtp.SMTPSendFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.SendFailedException;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -44,6 +47,9 @@ public class AuthController {
 
   @Autowired
   JwtUtils jwtUtils;
+
+  @Autowired
+  SpringMailService mailService;
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -116,8 +122,15 @@ public class AuthController {
     }
 
     user.setRoles(roles);
+    String erroEmail = "";
+    try {
+      mailService.sendMail(user.getEmail(), "Boas vindas", "Olá " + user.getUsername() + "! Seja bem vindo ao Meu Boleto Pago");
+    } catch (SMTPSendFailedException e) {
+      erroEmail = "\nNão foi possível enviar e-mail de saudação.";
+    }
+
     userRepository.save(user);
 
-    return ResponseEntity.ok(new MessageResponse("Usuário registrado com sucesso! Agora você tem mais controle sobre seus boletos :)"));
+    return ResponseEntity.ok(new MessageResponse("Usuário registrado com sucesso! Agora você tem mais controle sobre seus boletos :)" + erroEmail));
   }
 }
