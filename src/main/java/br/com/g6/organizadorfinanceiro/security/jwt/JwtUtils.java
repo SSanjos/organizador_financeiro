@@ -1,6 +1,6 @@
 package br.com.g6.organizadorfinanceiro.security.jwt;
 
-import br.com.g6.organizadorfinanceiro.services.UserDetailsImpl;
+import br.com.g6.organizadorfinanceiro.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

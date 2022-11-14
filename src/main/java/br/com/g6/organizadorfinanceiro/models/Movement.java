@@ -17,53 +17,109 @@ public class Movement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter
-	@Setter //??
+
 //	@Column(name = "idMovement", nullable = false)//permite alterar nome da coluna
 	private Long idMovement;
 
 	@NotNull
-	@Getter
-	@Setter
+
 	private double valueMovement;
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Getter
-	@Setter
+
 	private Date dueDate;
 	//~~alteração do nome para data do vencimento~~
 	
 	@NotNull
-	@Getter
-	@Setter
+
 	@Size(min = 1, max = 500)
 	private String descriptionMovement;
 
 
-	@Getter
-	@Setter
+
 	private int seqParcel;
 	//~~ver como implementar~~
 
 	@ManyToOne
 	@JsonIgnoreProperties ("movementList")
 	@JoinColumn ( name = "id")
-	@Getter
-	@Setter
+
 	private User user;
 
 
 	@NotNull
-	@Getter
-	@Setter
+
 	@Enumerated(EnumType.STRING)
 	private TypeMovement typeMovement;
 
 	@NotNull
-	@Getter
-	@Setter
+
 	private Boolean wasPaid;
+
+	public Long getIdMovement() {
+		return idMovement;
+	}
+
+	public void setIdMovement(Long idMovement) {
+		this.idMovement = idMovement;
+	}
+
+	public double getValueMovement() {
+		return valueMovement;
+	}
+
+	public void setValueMovement(double valueMovement) {
+		this.valueMovement = valueMovement;
+	}
+
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public String getDescriptionMovement() {
+		return descriptionMovement;
+	}
+
+	public void setDescriptionMovement(String descriptionMovement) {
+		this.descriptionMovement = descriptionMovement;
+	}
+
+	public int getSeqParcel() {
+		return seqParcel;
+	}
+
+	public void setSeqParcel(int seqParcel) {
+		this.seqParcel = seqParcel;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public TypeMovement getTypeMovement() {
+		return typeMovement;
+	}
+
+	public void setTypeMovement(TypeMovement typeMovement) {
+		this.typeMovement = typeMovement;
+	}
+
+	public Boolean getWasPaid() {
+		return wasPaid;
+	}
+
+	public void setWasPaid(Boolean wasPaid) {
+		this.wasPaid = wasPaid;
+	}
 	//default: false
 
 

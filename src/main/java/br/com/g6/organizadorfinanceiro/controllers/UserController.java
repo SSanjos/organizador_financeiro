@@ -1,8 +1,7 @@
 package br.com.g6.organizadorfinanceiro.controllers;
 
 import br.com.g6.organizadorfinanceiro.models.User;
-import br.com.g6.organizadorfinanceiro.services.UserService;
-import lombok.AllArgsConstructor;
+import br.com.g6.organizadorfinanceiro.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +30,16 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Long> DeleteUser(@PathVariable Long userId){
-        userService.deleteById(userId);
-        return new ResponseEntity<Long>(userId, HttpStatus.OK);
+    public ResponseEntity<Long> DeleteUser(@PathVariable Long id){
+        userService.deleteById(id);
+        return new ResponseEntity<Long>(id, HttpStatus.OK);
 
 
     }
+
+
+
 
 }
