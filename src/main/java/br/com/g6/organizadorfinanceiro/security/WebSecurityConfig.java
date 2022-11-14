@@ -2,8 +2,7 @@ package br.com.g6.organizadorfinanceiro.security;
 
 import br.com.g6.organizadorfinanceiro.security.jwt.AuthEntryPointJwt;
 import br.com.g6.organizadorfinanceiro.security.jwt.AuthTokenFilter;
-import br.com.g6.organizadorfinanceiro.security.services.UserDetailsServiceImpl;
-import io.jsonwebtoken.ExpiredJwtException;
+import br.com.g6.organizadorfinanceiro.security.servicesUser.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

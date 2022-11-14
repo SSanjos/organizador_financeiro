@@ -1,6 +1,6 @@
 package br.com.g6.organizadorfinanceiro.security.jwt;
 
-import br.com.g6.organizadorfinanceiro.security.services.UserDetailsServiceImpl;
+import br.com.g6.organizadorfinanceiro.security.servicesUser.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

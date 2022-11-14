@@ -2,7 +2,7 @@ package br.com.g6.organizadorfinanceiro.controllers;
 
 import br.com.g6.organizadorfinanceiro.models.User;
 
-import br.com.g6.organizadorfinanceiro.security.services.UserService;
+import br.com.g6.organizadorfinanceiro.security.servicesUser.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<User>> getAll(){
         try {
             return ResponseEntity.ok(userService.findAll());

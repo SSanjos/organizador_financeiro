@@ -1,17 +1,28 @@
-package br.com.g6.organizadorfinanceiro.security.services;
+package br.com.g6.organizadorfinanceiro.security.servicesUser;
 
 
 import br.com.g6.organizadorfinanceiro.models.User;
 import br.com.g6.organizadorfinanceiro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired(required = true)
     private UserRepository userRepository;
+
+
+    private Optional<User> getCurrentUser(){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> userLogged = userRepository.findByUsername(userDetails.getUsername());
+
+        return userLogged;
+    }
 
     public List<User> findAll(){
         try {
@@ -35,13 +46,19 @@ public class UserService {
         }
 
     }
+
+
+
     public void deleteById(Long id){
         try {
-            userRepository.deleteById(id);
-        }
-        catch (Exception e)
+            Optional<User> user = getCurrentUser();
+            if (user.isPresent()) {
+
+                userRepository.deleteById(id);
+            }
+        }catch (Exception e)
         {
-            throw new RuntimeException("Usuário não encontrado " + id + ": " + e.getMessage());
+            throw new RuntimeException("Usuário " + id + ": " + e.getMessage());
         }
 
     }

@@ -11,7 +11,7 @@ import br.com.g6.organizadorfinanceiro.repository.RoleRepository;
 import br.com.g6.organizadorfinanceiro.repository.UserRepository;
 import br.com.g6.organizadorfinanceiro.security.jwt.JwtUtils;
 
-import br.com.g6.organizadorfinanceiro.security.services.UserDetailsImpl;
+import br.com.g6.organizadorfinanceiro.security.servicesUser.UserDetailsImpl;
 
 import br.com.g6.organizadorfinanceiro.services.SpringMailService;
 
@@ -26,7 +26,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.SendFailedException;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;

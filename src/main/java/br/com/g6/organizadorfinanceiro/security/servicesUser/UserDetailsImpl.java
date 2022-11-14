@@ -1,4 +1,4 @@
-package br.com.g6.organizadorfinanceiro.security.services;
+package br.com.g6.organizadorfinanceiro.security.servicesUser;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.g6.organizadorfinanceiro.models.User;

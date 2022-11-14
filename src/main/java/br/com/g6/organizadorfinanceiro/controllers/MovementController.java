@@ -2,7 +2,7 @@ package br.com.g6.organizadorfinanceiro.controllers;
 
 
 import br.com.g6.organizadorfinanceiro.models.Movement;
-import br.com.g6.organizadorfinanceiro.security.services.MovementService;
+import br.com.g6.organizadorfinanceiro.services.MovementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
