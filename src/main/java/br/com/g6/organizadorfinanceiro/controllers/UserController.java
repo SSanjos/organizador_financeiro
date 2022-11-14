@@ -1,7 +1,9 @@
 package br.com.g6.organizadorfinanceiro.controllers;
 
 import br.com.g6.organizadorfinanceiro.models.User;
+
 import br.com.g6.organizadorfinanceiro.security.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
