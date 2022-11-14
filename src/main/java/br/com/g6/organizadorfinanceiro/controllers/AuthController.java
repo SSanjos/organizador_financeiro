@@ -10,9 +10,13 @@ import br.com.g6.organizadorfinanceiro.payload.response.MessageResponse;
 import br.com.g6.organizadorfinanceiro.repository.RoleRepository;
 import br.com.g6.organizadorfinanceiro.repository.UserRepository;
 import br.com.g6.organizadorfinanceiro.security.jwt.JwtUtils;
+
+import br.com.g6.organizadorfinanceiro.security.services.UserDetailsImpl;
+
 import br.com.g6.organizadorfinanceiro.services.SpringMailService;
-import br.com.g6.organizadorfinanceiro.services.UserDetailsImpl;
+
 import com.sun.mail.smtp.SMTPSendFailedException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,6 +52,9 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
+
+  //~~~LOGIN DO USUÁRIO~~~//
+
   @Autowired
   SpringMailService mailService;
 
@@ -72,6 +79,8 @@ public class AuthController {
                          roles));
   }
 
+
+  //~~~CADASTRO DE USUÁRIO~~~//
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {

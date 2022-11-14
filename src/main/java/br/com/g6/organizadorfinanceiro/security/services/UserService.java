@@ -1,4 +1,4 @@
-package br.com.g6.organizadorfinanceiro.services;
+package br.com.g6.organizadorfinanceiro.security.services;
 
 
 import br.com.g6.organizadorfinanceiro.models.User;
@@ -15,8 +15,9 @@ public class UserService {
 
     public List<User> findAll(){
         try {
-            UserService userRepository = null;
             return userRepository.findAll();
+//            UserService userRepository = null;
+//            return userRepository.findAll();
         }
         catch (Exception e)
         {
@@ -34,13 +35,13 @@ public class UserService {
         }
 
     }
-    public void deleteById(Long idUser){
+    public void deleteById(Long id){
         try {
-            userRepository.deleteById(idUser);
+            userRepository.deleteById(id);
         }
         catch (Exception e)
         {
-            throw new RuntimeException("Usuário não encontrado " + idUser + ": " + e.getMessage());
+            throw new RuntimeException("Usuário não encontrado " + id + ": " + e.getMessage());
         }
 
     }

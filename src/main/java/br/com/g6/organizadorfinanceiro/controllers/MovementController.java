@@ -2,7 +2,7 @@ package br.com.g6.organizadorfinanceiro.controllers;
 
 
 import br.com.g6.organizadorfinanceiro.models.Movement;
-import br.com.g6.organizadorfinanceiro.services.MovementService;
+import br.com.g6.organizadorfinanceiro.security.services.MovementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +33,7 @@ public class MovementController {
 
     //~filtra os movimentos por despesa/receita ~ //
     @GetMapping("/{typeMovement}")
-    @PreAuthorize("hasRole('USER')")
+//    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<Movement>> findByTypeMovement(@PathVariable("typeMovement") String typeMovement) {
         try {
             return ResponseEntity.ok(movementService.findByTypeMovement(typeMovement));
@@ -58,10 +58,6 @@ public ResponseEntity<Movement> put(@RequestBody Movement movement){
                 .body(movementService.save(movement));
 
     }
-    //método put não altera o mesmo movimento
-
-
-
 
     @DeleteMapping("/{idMovement}")
     @PreAuthorize("hasRole('USER')")

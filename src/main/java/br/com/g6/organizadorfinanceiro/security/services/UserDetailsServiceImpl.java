@@ -1,4 +1,4 @@
-package br.com.g6.organizadorfinanceiro.services;
+package br.com.g6.organizadorfinanceiro.security.services;
 
 import br.com.g6.organizadorfinanceiro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

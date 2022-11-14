@@ -1,4 +1,4 @@
-package br.com.g6.organizadorfinanceiro.services;
+package br.com.g6.organizadorfinanceiro.security.services;
 
 import br.com.g6.organizadorfinanceiro.enumeration.TypeMovement;
 import br.com.g6.organizadorfinanceiro.models.Movement;
