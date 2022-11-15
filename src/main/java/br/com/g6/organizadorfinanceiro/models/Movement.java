@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-
 @Entity
 @Table(name = "Movement")
 public class Movement {
@@ -19,12 +18,10 @@ public class Movement {
 	private Long idMovement;
 
 	@NotNull
-
 	private double valueMovement;
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-
 	private Date dueDate;
 	//~~alteração do nome para data do vencimento~~
 	
@@ -32,8 +29,6 @@ public class Movement {
 
 	@Size(min = 1, max = 500)
 	private String descriptionMovement;
-
-
 
 	private int seqParcel;
 	//~~ver como implementar~~
@@ -46,12 +41,10 @@ public class Movement {
 
 
 	@NotNull
-
 	@Enumerated(EnumType.STRING)
 	private TypeMovement typeMovement;
 
 	@NotNull
-
 	private Boolean wasPaid;
 
 	public Long getIdMovement() {
@@ -117,10 +110,4 @@ public class Movement {
 	public void setWasPaid(Boolean wasPaid) {
 		this.wasPaid = wasPaid;
 	}
-	//default: false
-
-
-
-
 }
-

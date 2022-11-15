@@ -1,6 +1,7 @@
 package br.com.g6.organizadorfinanceiro.controllers;
 
 
+import br.com.g6.organizadorfinanceiro.dto.MovementDto;
 import br.com.g6.organizadorfinanceiro.models.Movement;
 import br.com.g6.organizadorfinanceiro.services.MovementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,26 +21,15 @@ public class MovementController {
     @Autowired
     private MovementService movementService;
 
-//~pega todos os movimentos do usuário logado ~ //
-    @GetMapping
+//	~filtra os movimentos~ //
+    @GetMapping()
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<Movement>> getAll() {
-        try {
-            return ResponseEntity.ok(movementService.findAll());
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    //~filtra os movimentos por despesa/receita ~ //
-    @GetMapping("/{typeMovement}")
-//    @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<Movement>> findByTypeMovement(@PathVariable("typeMovement") String typeMovement) {
-        try {
-            return ResponseEntity.ok(movementService.findByTypeMovement(typeMovement));
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<List<Movement>> findByFilter(@RequestBody MovementDto filter) {
+    	try {
+    		return ResponseEntity.ok(movementService.findByFilter(filter));
+    	} catch (Exception e) {
+    		return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+    	}
     }
 
     //~cria uma nova movimentação ~ //
@@ -51,9 +41,9 @@ public class MovementController {
                 .body(movementService.save(createMovement));
     }
 
-@PutMapping("/change")
-@PreAuthorize("hasRole('USER')")
-public ResponseEntity<Movement> put(@RequestBody Movement movement){
+    @PutMapping("/change")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<Movement> put(@RequestBody Movement movement){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(movementService.save(movement));
 
@@ -65,8 +55,4 @@ public ResponseEntity<Movement> put(@RequestBody Movement movement){
         movementService.deleteById(idMovement);
         return new ResponseEntity<Long>(idMovement, HttpStatus.OK);
     }
-
 }
-
-
-
