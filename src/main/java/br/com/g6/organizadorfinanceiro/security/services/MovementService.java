@@ -5,7 +5,7 @@ import br.com.g6.organizadorfinanceiro.models.Movement;
 import br.com.g6.organizadorfinanceiro.models.User;
 import br.com.g6.organizadorfinanceiro.repository.MovementRepository;
 import br.com.g6.organizadorfinanceiro.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+//import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class MovementService {
     @Autowired
     private MovementRepository movementRepository;
@@ -93,5 +93,22 @@ public class MovementService {
         }
 
     }
+    
+    
+    
+  //~~método para mostrar saldo das movimentações pelo tipo~~
+    public List<Movement> findByTypeMovement(String typeMovement) {
+        try {
+            TypeMovement type = TypeMovement.get(typeMovement);
+            Optional<User> user = getCurrentUser();
+            if (user.isPresent()) {
+                return (movementRepository.findByTypeMovement(type.toString(),user.get().getId()));
+            }
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException("Erro na consulta de tipo de movimento" + e.getMessage());
+        }
+    }
+    
 
 }

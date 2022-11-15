@@ -51,6 +51,7 @@ public class MovementController {
                 .body(movementService.save(createMovement));
     }
 
+    //atualiza uma nova movimentação //
 @PutMapping("/change")
 @PreAuthorize("hasRole('USER')")
 public ResponseEntity<Movement> put(@RequestBody Movement movement){
@@ -58,6 +59,17 @@ public ResponseEntity<Movement> put(@RequestBody Movement movement){
                 .body(movementService.save(movement));
 
     }
+
+
+@PutMapping("/balance")
+@PreAuthorize("hasRole('USER')")
+public ResponseEntity<Movement> get(@RequestBody Movement movement){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(movementService.save(movement));
+
+    }
+
+
 
     @DeleteMapping("/{idMovement}")
     @PreAuthorize("hasRole('USER')")

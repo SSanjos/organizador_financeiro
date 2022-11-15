@@ -2,8 +2,7 @@ package br.com.g6.organizadorfinanceiro.models;
 
 import br.com.g6.organizadorfinanceiro.enumeration.TypeMovement;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
