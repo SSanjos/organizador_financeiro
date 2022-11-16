@@ -9,8 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import br.com.g6.organizadorfinanceiro.dto.MovementDto;
+import br.com.g6.organizadorfinanceiro.enumeration.TypeMovement;
 import br.com.g6.organizadorfinanceiro.models.Movement;
 import br.com.g6.organizadorfinanceiro.models.User;
+import br.com.g6.organizadorfinanceiro.models.UserBalanceResponse;
 import br.com.g6.organizadorfinanceiro.repository.MovementRepository;
 import br.com.g6.organizadorfinanceiro.repository.UserRepository;
 //import lombok.RequiredArgsConstructor;
@@ -26,6 +28,8 @@ public class MovementService {
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
     private UserRepository userRepository;
+   
+    
     
     //~~método para retornar qual usuário está logado ~~
     private Optional<User> getCurrentUser(){
@@ -76,4 +80,59 @@ public class MovementService {
         }
 
     }
+    
+  //~~método para pegar o saldo~~
+    public UserBalanceResponse getBalance() {
+    	try {
+            Optional<User> user = getCurrentUser();
+            if (user.isPresent()) {
+
+              List<Movement> receitas = findByTypeMovement("receita");
+                            
+              double totalReceita = 0;
+              UserBalanceResponse response = new UserBalanceResponse();
+              
+              if(receitas.isEmpty()) {
+            	  response.setReceitas(totalReceita);
+              } 
+              
+              for (Movement movement : receitas) {
+				totalReceita += movement.getValueMovement();
+			}
+              response.setReceitas(totalReceita);          
+                          
+            
+            List<Movement> despesas = findByTypeMovement("despesa");
+            
+            double totalDespesa = 0;          
+            
+            if(despesas.isEmpty()) {
+          	  response.setDespesas(totalDespesa);
+            } 
+            
+            for (Movement movement : despesas) {
+				totalDespesa += movement.getValueMovement();
+			}
+            response.setDespesas(totalDespesa);
+            
+                        response.setSaldo(totalReceita- totalDespesa);
+            
+                        return response;
+            } else throw new RuntimeException();
+                      
+            
+        }catch (Exception e)
+        {
+            throw new RuntimeException("Usuário não encontrado");
+        }
+    	  	
+    }
+
+	private List<Movement> findByTypeMovement(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+    
+    
 }
