@@ -7,11 +7,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class MovementDto {
 	
 	private String typeMovement;
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private Date periodoDe;
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private Date periodoAte;
+	
 	private String description;
+	private Long idUsuario;
+	private Double valueMovementIni;
+	private Double valueMovementEnd;
+	private Boolean wasPaid;
 	
 	public String getTypeMovement() {
 		return typeMovement;
@@ -36,5 +43,29 @@ public class MovementDto {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	public Double getValueMovementIni() {
+		return valueMovementIni;
+	}
+	public void setValueMovementIni(Double valueMovementIni) {
+		this.valueMovementIni = valueMovementIni;
+	}
+	public Double getValueMovementEnd() {
+		return valueMovementEnd;
+	}
+	public void setValueMovementEnd(Double valueMovementEnd) {
+		this.valueMovementEnd = valueMovementEnd;
+	}
+	public Boolean getWasPaid() {
+		return wasPaid;
+	}
+	public void setWasPaid(Boolean wasPaid) {
+		this.wasPaid = wasPaid;
 	}
 }

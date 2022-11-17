@@ -21,6 +21,9 @@ public class FilterMovement {
     	    if(tm != null) {
     	    	predicates.add(criteriaBuilder.equal(root.get("typeMovement"), tm));
     	    }
+    	    if(filter.getIdUsuario() != null) {
+    	    	predicates.add(criteriaBuilder.equal(root.get("user"), filter.getIdUsuario()));
+    	    }
     	    if(filter.getPeriodoDe() != null && filter.getPeriodoAte() == null) {
     	    	predicates.add(criteriaBuilder.greaterThan(root.get("dueDate"), filter.getPeriodoDe()));
     	    } else if(filter.getPeriodoAte() != null && filter.getPeriodoDe() == null) {
@@ -28,8 +31,18 @@ public class FilterMovement {
     	    } else if(filter.getPeriodoDe() != null && filter.getPeriodoAte() != null) {
     	    	predicates.add(criteriaBuilder.between(root.get("dueDate"), filter.getPeriodoDe(), filter.getPeriodoAte()));
     	    }
+    	    if(filter.getValueMovementIni() != null && filter.getValueMovementEnd() == null) {
+    	    	predicates.add(criteriaBuilder.greaterThan(root.get("valueMovement"), filter.getValueMovementIni()));
+    	    } else if(filter.getValueMovementEnd() != null && filter.getValueMovementIni() == null) {
+    	    	predicates.add(criteriaBuilder.lessThan(root.get("valueMovement"), filter.getValueMovementEnd()));
+    	    } else if(filter.getValueMovementIni() != null && filter.getValueMovementEnd() != null) {
+    	    	predicates.add(criteriaBuilder.between(root.get("valueMovement"), filter.getValueMovementIni(), filter.getValueMovementEnd()));
+    	    }
     	    if(filter.getDescription() !=null) {
     	    	predicates.add(criteriaBuilder.like(root.get("descriptionMovement"), "%" + filter.getDescription() + "%"));
+    	    }
+    	    if(filter.getWasPaid() != null) {
+    	    	predicates.add(criteriaBuilder.equal(root.get("wasPaid"), filter.getWasPaid()));
     	    }
     		return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
     	};

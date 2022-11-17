@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import br.com.g6.organizadorfinanceiro.dto.MovementDto;
-import br.com.g6.organizadorfinanceiro.enumeration.TypeMovement;
 import br.com.g6.organizadorfinanceiro.models.Movement;
 import br.com.g6.organizadorfinanceiro.models.User;
 import br.com.g6.organizadorfinanceiro.models.UserBalanceResponse;
@@ -28,8 +27,6 @@ public class MovementService {
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
     private UserRepository userRepository;
-   
-    
     
     //~~método para retornar qual usuário está logado ~~
     private Optional<User> getCurrentUser(){
@@ -39,7 +36,7 @@ public class MovementService {
         return userLogged;
     }
 
-//~~método para salvar movimentações~~
+    //~~método para salvar movimentações~~
     public Movement save( Movement createMovement) {
         try {
             Optional<User> user = getCurrentUser();
@@ -56,17 +53,22 @@ public class MovementService {
         }
     }
 
-//~~método para os filtros~~
+    //~~método para os filtros~~
     public List<Movement> findByFilter(MovementDto filter) {
         try {
-        	FilterMovement filterMovement = new FilterMovement();
-        	return movementRepository.findAll(filterMovement.toSpecification(filter));
+            Optional<User> user = getCurrentUser();
+            if (user.isPresent()) {
+            	FilterMovement filterMovement = new FilterMovement();
+            	filter.setIdUsuario(user.get().getId());
+            	return movementRepository.findAll(filterMovement.toSpecification(filter));
+            }
+            return null;
         } catch (Exception e) {
             throw new RuntimeException("Erro na consulta" + e.getMessage());
         }
     }
     
-//~~deletar movimento pelo id~~
+    //~~deletar movimento pelo id~~
     public void deleteById(Long idMovement){
         try {
             Optional<User> user = getCurrentUser();
@@ -81,58 +83,49 @@ public class MovementService {
 
     }
     
-  //~~método para pegar o saldo~~
+    //~~método para pegar o saldo~~
     public UserBalanceResponse getBalance() {
     	try {
             Optional<User> user = getCurrentUser();
             if (user.isPresent()) {
 
-              List<Movement> receitas = findByTypeMovement("receita");
+            	MovementDto filter = new MovementDto();
+            	filter.setTypeMovement("receita");
+            	List<Movement> receitas = findByFilter(filter);
                             
-              double totalReceita = 0;
-              UserBalanceResponse response = new UserBalanceResponse();
+            	double totalReceita = 0;
+            	UserBalanceResponse response = new UserBalanceResponse();
               
-              if(receitas.isEmpty()) {
+            	if(receitas.isEmpty()) {
             	  response.setReceitas(totalReceita);
-              } 
+            	} 
               
-              for (Movement movement : receitas) {
-				totalReceita += movement.getValueMovement();
-			}
-              response.setReceitas(totalReceita);          
-                          
-            
-            List<Movement> despesas = findByTypeMovement("despesa");
-            
-            double totalDespesa = 0;          
-            
-            if(despesas.isEmpty()) {
-          	  response.setDespesas(totalDespesa);
-            } 
-            
-            for (Movement movement : despesas) {
-				totalDespesa += movement.getValueMovement();
-			}
-            response.setDespesas(totalDespesa);
-            
-                        response.setSaldo(totalReceita- totalDespesa);
-            
-                        return response;
+            	for (Movement movement : receitas) {
+            		totalReceita += movement.getValueMovement();
+            	}
+	            response.setReceitas(totalReceita);          
+	            
+	            filter.setTypeMovement("despesa");
+	            List<Movement> despesas = findByFilter(filter);
+	            
+	            double totalDespesa = 0;          
+	            
+	            if(despesas.isEmpty()) {
+	          	  response.setDespesas(totalDespesa);
+	            } 
+	            
+	            for (Movement movement : despesas) {
+					totalDespesa += movement.getValueMovement();
+				}
+	            response.setDespesas(totalDespesa);
+	            
+	            response.setSaldo(totalReceita- totalDespesa);
+	            
+	            return response;
             } else throw new RuntimeException();
-                      
-            
         }catch (Exception e)
         {
             throw new RuntimeException("Usuário não encontrado");
         }
-    	  	
-    }
-
-	private List<Movement> findByTypeMovement(String string) {
-		// TODO Auto-generated method stub
-		return null;
 	}
-    
-    
-    
 }
