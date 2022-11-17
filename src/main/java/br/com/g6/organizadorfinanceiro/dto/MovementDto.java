@@ -15,10 +15,12 @@ public class MovementDto {
 	private Date periodoAte;
 	
 	private String description;
-	private Long idUsuario;
+
 	private Double valueMovementIni;
 	private Double valueMovementEnd;
 	private Boolean wasPaid;
+
+
 	
 	public String getTypeMovement() {
 		return typeMovement;
@@ -44,12 +46,7 @@ public class MovementDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+
 	public Double getValueMovementIni() {
 		return valueMovementIni;
 	}

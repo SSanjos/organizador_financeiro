@@ -6,18 +6,19 @@ import br.com.g6.organizadorfinanceiro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 public class UserService {
     @Autowired(required = true)
     private UserRepository userRepository;
 
 
-    private Optional<User> getCurrentUser(){
+    public Optional<User> getCurrentUser(){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> userLogged = userRepository.findByUsername(userDetails.getUsername());
 

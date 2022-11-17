@@ -32,7 +32,6 @@ public class MovementService {
     private Optional<User> getCurrentUser(){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> userLogged = userRepository.findByUsername(userDetails.getUsername());
-
         return userLogged;
     }
 
@@ -56,13 +55,8 @@ public class MovementService {
     //~~método para os filtros~~
     public List<Movement> findByFilter(MovementDto filter) {
         try {
-            Optional<User> user = getCurrentUser();
-            if (user.isPresent()) {
-            	FilterMovement filterMovement = new FilterMovement();
-            	filter.setIdUsuario(user.get().getId());
-            	return movementRepository.findAll(filterMovement.toSpecification(filter));
-            }
-            return null;
+            FilterMovement filterMovement = new FilterMovement();
+            return movementRepository.findAll(filterMovement.toSpecification(filter));
         } catch (Exception e) {
             throw new RuntimeException("Erro na consulta" + e.getMessage());
         }
