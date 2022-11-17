@@ -19,6 +19,7 @@ public class MovementDto {
 	private Double valueMovementIni;
 	private Double valueMovementEnd;
 	private Boolean wasPaid;
+	private Long idMovement;
 	
 	public String getTypeMovement() {
 		return typeMovement;
@@ -68,4 +69,11 @@ public class MovementDto {
 	public void setWasPaid(Boolean wasPaid) {
 		this.wasPaid = wasPaid;
 	}
+	public Long getIdMovement() {
+		return idMovement;
+	}
+	public void setIdMovement(Long idMovement) {
+		this.idMovement = idMovement;
+	}
+	
 }

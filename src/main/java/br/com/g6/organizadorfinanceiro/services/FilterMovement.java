@@ -22,7 +22,11 @@ public class FilterMovement {
     	    	predicates.add(criteriaBuilder.equal(root.get("typeMovement"), tm));
     	    }
     	    if(filter.getIdUsuario() != null) {
-    	    	predicates.add(criteriaBuilder.equal(root.get("user"), filter.getIdUsuario()));
+    	    	root.fetch("user");
+    	    	predicates.add(criteriaBuilder.equal(root.get("user").get("id"), filter.getIdUsuario()));
+    	    }
+    	    if(filter.getIdMovement() != null) {
+    	    	predicates.add(criteriaBuilder.equal(root.get("idMovement"), filter.getIdMovement()));
     	    }
     	    if(filter.getPeriodoDe() != null && filter.getPeriodoAte() == null) {
     	    	predicates.add(criteriaBuilder.greaterThan(root.get("dueDate"), filter.getPeriodoDe()));
