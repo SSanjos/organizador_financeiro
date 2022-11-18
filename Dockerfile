@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:8
+FROM openjdk:20-slim-buster
 VOLUME /tmp
 EXPOSE 8080
 COPY target/organizadorfinanceir-0.0.1-SNAPSHOT.jar app.jar

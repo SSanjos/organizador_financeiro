@@ -49,7 +49,7 @@ public class MovementController {
 
 	@DeleteMapping("/{idMovement}")
 	@PreAuthorize("hasRole('USER')")
-	public ResponseEntity<Long> DeleteMovement(@PathVariable Long idMovement) {
+	public ResponseEntity<Long> deleteMovement(@PathVariable Long idMovement) {
 		movementService.deleteById(idMovement);
 		return new ResponseEntity<Long>(idMovement, HttpStatus.OK);
 	}
